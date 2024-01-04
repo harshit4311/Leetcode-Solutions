@@ -1,0 +1,32 @@
+class Solution {
+    public int[] nextGreaterElements(int[] arr) {
+        int n = arr.length;
+        int[] ngeArr = new int[n];
+        Stack<Integer> stack = new Stack<>();
+
+        // Traverse the array in reverse order (considering it as circular)
+        for (int i = 2 * n - 1; i >= 0; i--) {
+
+            // Pop elements from the stack until the stack is empty or the top element is greater than the current element
+            while (!stack.isEmpty() && stack.peek() <= arr[i % n]) {
+                stack.pop();
+            }
+
+            // If the stack is not empty, the next greater element is the top element of the stack
+            if (!stack.isEmpty()) {
+                ngeArr[i % n] = stack.peek();
+            } 
+            
+            // If the stack is empty, there is no greater element, so assign -1
+            else {
+                ngeArr[i % n] = -1;
+            }
+            
+            // Push the current element's index onto the stack
+            stack.push(arr[i % n]);
+        }
+        
+        // Return the array containing the next greater elements for each index
+        return ngeArr;
+    }
+}
