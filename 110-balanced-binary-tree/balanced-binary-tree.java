@@ -15,31 +15,27 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        if(root == null){
-            return true;
-        }
+        int result = checkHeight(root);
 
-        int leftHeight = maxDepth(root.left);
-        int rightHeight = maxDepth(root.right);
-
-        // Check if the tree is balanced at the current node
-        if (Math.abs(leftHeight - rightHeight) > 1) {
-            return false;
-        }
-
-        // Check if the left and right subtrees are balanced
-        return isBalanced(root.left) && isBalanced(root.right);
+        if(result != -1) {return true;}
+        else {return false;}
     }
 
-    public static int maxDepth(TreeNode root){
+    public static int checkHeight(TreeNode root){
         if(root == null){
             return 0;
         }
 
-        int leftHeight = maxDepth(root.left);
-        int rightHeight = maxDepth(root.right);
+        int leftHeight = checkHeight(root.left);
+        if (leftHeight == -1) {
+            return -1;  // Left subtree is not balanced
+        }
 
-        // Return the maximum height of the left and right subtrees
+        int rightHeight = checkHeight(root.right);
+        if (rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;  // Right subtree is not balanced or current node is not balanced
+        }
+
         return Math.max(leftHeight, rightHeight) + 1;
     }
 }
