@@ -36,6 +36,6 @@ class Solution {
             return -1;  // Right subtree is not balanced or current node is not balanced
         }
 
-        return Math.max(leftHeight, rightHeight) + 1;
+        return (Math.max(leftHeight, rightHeight) + 1);
     }
 }
