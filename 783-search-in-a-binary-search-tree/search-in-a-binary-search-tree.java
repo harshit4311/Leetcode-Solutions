@@ -15,19 +15,20 @@
  */
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        // If the root is null or the root's value is equal to the target, return the root
-        if (root == null || root.val == val) {
+        
+        if(root == null || root.val == val){
             return root;
         }
 
-        // If the target is less than the root's value, search in the left subtree
-        if (val < root.val) {
+        // Search on the left side
+        if(val < root.val){
             return searchBST(root.left, val);
         }
 
-        // If the target is greater than the root's value, search in the right subtree
-        else {
+        // Search on the right side
+        else{
             return searchBST(root.right, val);
         }
+
     }
 }
