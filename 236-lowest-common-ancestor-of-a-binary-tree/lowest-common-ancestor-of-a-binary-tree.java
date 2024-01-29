@@ -20,7 +20,8 @@ class Solution {
 
         if(right == null) return left;
 
-        else // when both left, and right are not null
+        // when both left, and right are not null
+        else 
         return root;
     }
 }
