@@ -32,7 +32,7 @@ class Solution {
         int rightDepth = calculateDiameter(node.right);
 
         // Update the diameter
-        diameter = Math.max(diameter, leftDepth + rightDepth);
+        diameter = Math.max(diameter, (leftDepth + rightDepth));
 
         // Return the depth of the subtree rooted at the current node
         return 1 + Math.max(leftDepth, rightDepth);
