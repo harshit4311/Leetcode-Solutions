@@ -23,18 +23,16 @@ class Solution {
     }
 
     public boolean isMirror(TreeNode Node1, TreeNode Node2){
-        if (Node1 == null && Node2 == null) {
-            return true;
-        }
+        if(Node1 == null && Node2 == null) 
+        return true;
 
-        if (Node1 == null || Node2 == null) {
-            return false;
-        }
+        if(Node1 == null || Node2 == null) 
+        return false;
 
-        if(Node1.val != Node2.val){
-            return false;
-        }
+        if(Node1.val != Node2.val) 
+        return false;
 
         return (isMirror(Node1.left, Node2.right) && isMirror(Node1.right, Node2.left));
+
     }
 }
