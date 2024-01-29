@@ -26,10 +26,13 @@ class Solution {
             return 0;
         }
 
+        // Calculate the sum of the Left Subtree
         int leftSum = (Math.max(0, calculateMaxPathSum(root.left)));
+
+        // Calculate the sum of the Right Subtree
         int rightSum = (Math.max(0, calculateMaxPathSum(root.right)));
 
-        // updating the maxSum
+        // Updating the maxSum
         maxSum = Math.max(maxSum, leftSum + rightSum + root.val);
 
         return Math.max(leftSum, rightSum) + root.val;
