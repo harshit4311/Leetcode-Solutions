@@ -10,25 +10,43 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode head1, ListNode head2) {
+        if(head1 == null && head2 == null) return null;
 
-        // List-1 is null
-        if (head1 == null) {
-            return head2;
-        }
+        if(head1 == null) return head2;
 
-        // List-2 is null
-        if (head2 == null) {
-            return head1;
-        }
+        if(head2 == null) return head1;
 
-        // When both lists are not null
-        if (head1.val < head2.val) {
-            head1.next = mergeTwoLists(head1.next, head2);
-            return head1;
-        } 
-        else {
-            head2.next = mergeTwoLists(head1, head2.next);
-            return head2;
+        else{
+            if(head1.val < head2.val){
+                head1.next = mergeTwoLists(head1.next, head2);
+                return head1;
+            }
+            else{
+                head2.next = mergeTwoLists(head1, head2.next);
+                return head2;
+            }
         }
     }
+
+
+    // Code for Returning the Sorted Linked List in Decreasing/Reverse Order
+
+    // public ListNode reverseList(ListNode head){
+    //     ListNode temp = head;
+    //     ListNode prev = null;
+
+    //     while(temp != null){
+    //        ListNode front = temp.next;
+    //        temp.next = prev;
+    //        prev = temp;
+    //        temp = front;
+    //     }
+
+    //     return prev;
+    // }
+
+    // public ListNode decreasingOrderList(ListNode head1, ListNode head2){
+    //     ListNode mergedList = mergeTwoLists(head1, head2);
+    //     return decreasingOrderList(mergedList);
+    // }
 }
