@@ -18,7 +18,7 @@ class Solution {
         while (start <= end) {
             int mid = start + (end - start) / 2;
 
-            // Mid is greater than its neighboring elements, it is a peak
+            // Mid is greater than its neighbouring elements, it is a peak
             if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) return mid;
 
             // If the element to the left of mid is greater, search in the left half
