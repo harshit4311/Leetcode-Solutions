@@ -22,14 +22,10 @@ class Solution {
             if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) return mid;
 
             // If the element to the left of mid is greater, search in the left half
-            if (arr[mid] < arr[mid - 1]) {
-                end = mid - 1;
-            }
+            if (arr[mid] < arr[mid - 1]) end = mid - 1;
 
             // If the element to the right of mid is greater, search in the right half
-            else if (arr[mid] < arr[mid + 1]) {
-                start = mid + 1;
-            }
+            else if (arr[mid] < arr[mid + 1]) start = mid + 1;
         }
 
         // No peak found
