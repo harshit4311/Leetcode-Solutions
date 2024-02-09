@@ -9,21 +9,9 @@
  * }
  */
 class Solution {
-    int max = 0;
-    
-    public ListNode removeNodes(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        
+        public ListNode removeNodes(ListNode head) {
+        if (head == null) return null;
         head.next = removeNodes(head.next);
-        
-        if (head.val < max) {
-            return head.next;
-        }
-        
-        max = Math.max(max, head.val);
-        
-        return head;
+        return head.next != null && head.val < head.next.val ? head.next : head;
     }
 }
