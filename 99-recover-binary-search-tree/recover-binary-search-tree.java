@@ -22,12 +22,14 @@ class Solution {
 
         inorder(root);
 
+        // swap the 'first' and 'last' nodes
         if(first != null && last != null){
             int temp = first.val;
             first.val = last.val;
             last.val = temp;
         }
 
+        // swap the 'first' and 'mid' nodes
         else if(first != null && mid != null){
             int temp = first.val;
             first.val = mid.val;
@@ -42,7 +44,7 @@ class Solution {
 
         if(prev != null && (root.val < prev.val)){
 
-            //if this is the 1st violation, mark these nodes as 'first' and 'mid'
+            // if this is the 1st violation, mark these nodes as 'first' and 'mid'
             if(first == null){
                 first = prev;
                 mid = root;
