@@ -42,7 +42,7 @@ class Solution {
 
         if(prev != null && (root.val < prev.val)){
 
-            //if this is the 1st violation, marks these nodes as 'first' and 'mid'
+            //if this is the 1st violation, mark these nodes as 'first' and 'mid'
             if(first == null){
                 first = prev;
                 mid = root;
