@@ -1,38 +1,20 @@
 class MyHashSet {
-    public int ARRAY_SIZE = 1000000; // Size of the array
-    public LinkedList<Integer>[] set; // Array of LinkedLists
+    public boolean[] key;
 
     public MyHashSet() {
-        set = new LinkedList[ARRAY_SIZE];
+        key = new boolean[1000001];
+        Arrays.fill(key, false);
     }
 
-    public void add(int key) {
-        int index = hash(key);
-        if (set[index] == null) {
-            set[index] = new LinkedList<>();
-        }
-        if (!contains(key)) {
-            set[index].add(key);
-        }
+    public void add(int keyValue) {
+        key[keyValue] = true;
     }
 
-    public void remove(int key) {
-        int index = hash(key);
-        if (set[index] != null) {
-            set[index].remove((Integer) key);
-        }
+    public void remove(int keyValue) {
+        key[keyValue] = false;
     }
 
-    public boolean contains(int key) {
-        int index = hash(key);
-        if (set[index] != null) {
-            return set[index].contains(key);
-        }
-        return false;
-    }
-
-    // Hash function to get the index for the key
-    public int hash(int key) {
-        return key % ARRAY_SIZE;
+    public boolean contains(int keyValue) {
+        return key[keyValue];
     }
 }
