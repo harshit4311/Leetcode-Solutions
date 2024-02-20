@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -18,20 +15,32 @@ import java.util.List;
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if (root == null) return result;
+        ArrayList<Integer> list = new ArrayList<>();
+        TreeNode current = root;
 
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        while(current != null){
+            if(current.left == null){
+                list.add(current.val);
+                current = current.right;
+            } 
+            else{
+                TreeNode prev = current.left;
 
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            result.add(node.val);
+                while(prev.right != null && prev.right != current){
+                    prev = prev.right;
+                }
 
-            // Pushing the right element first because LIFO
-            if (node.right != null) stack.push(node.right);
-            if (node.left != null) stack.push(node.left);
+                if(prev.right == null){
+                    prev.right = current;
+                    list.add(current.val);
+                    current = current.left;
+                } 
+                else{
+                    prev.right = null;
+                    current = current.right;
+                }
+            }
         }
-        return result;
+        return list;
     }
 }
