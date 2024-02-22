@@ -16,17 +16,17 @@ public class Trie{
     }
     
     public void insert(String word) {
-        TrieNode current = root;
-        for(int i = 0; i < word.length(); i++){
-            char ch = word.charAt(i);
+    TrieNode current = root;
+    for (int i = 0; i < word.length(); i++) {
+        char ch = word.charAt(i);
 
-            if(!current.map.containsKey(ch)){
-                current.map.put(ch, new TrieNode());
-            }
-            current = current.map.get(ch);
+        if (!current.map.containsKey(ch)) {
+            current.map.put(ch, new TrieNode());
         }
-        current.isEnd = true;
+        current = current.map.get(ch);
     }
+    current.isEnd = true;
+}
     
     public boolean search(String word) {
         TrieNode current = root;
