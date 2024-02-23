@@ -17,21 +17,25 @@ class Solution {
     public int minDepth(TreeNode root) {
         if(root == null) return 0;
 
-        int leftDepth = minDepth(root.left);
-        int rightDepth = minDepth(root.right);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int depth = 1;
 
-        // Both sides are null
-        if(root.left == null && root.right == null) return 1;
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
 
-        // Left side is null
-        if(root.left == null) return rightDepth + 1;
+            for(int i = 0; i < levelSize; i++){
+                TreeNode node = queue.poll();
 
-        // Right side is null
-        if(root.right == null) return leftDepth + 1;
+                if(node.left == null && node.right == null) return depth;
 
-        // Return the minimum of the two sides of none of them are null
-        return Math.min(leftDepth, rightDepth) + 1;
+                if(node.left != null) queue.add(node.left);
 
-
+                if(node.right != null) queue.add(node.right);
+            }
+            depth++; 
+        }
+        
+        return depth;
     }
 }
