@@ -17,7 +17,7 @@ class Solution {
     public boolean isCompleteTree(TreeNode root) {
         if(root == null) return true;
 
-        boolean nullEncountered = false;
+        boolean isNull = false;
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -25,10 +25,10 @@ class Solution {
         while(!queue.isEmpty()){
             TreeNode current = queue.poll();
 
-            if(current == null) nullEncountered = true;
+            if(current == null) isNull = true;
 
             else{
-                if(nullEncountered) return false;
+                if(isNull) return false;
 
                 queue.add(current.left);
                 queue.add(current.right);
