@@ -19,18 +19,17 @@ class Solution {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        int depth = 1;
+        int depth = 1; // main root node
 
         while(!queue.isEmpty()){
             int levelSize = queue.size();
 
             for(int i = 0; i < levelSize; i++){
                 TreeNode node = queue.poll();
-
+                
                 if(node.left == null && node.right == null) return depth;
 
                 if(node.left != null) queue.add(node.left);
-
                 if(node.right != null) queue.add(node.right);
             }
             depth++; 
