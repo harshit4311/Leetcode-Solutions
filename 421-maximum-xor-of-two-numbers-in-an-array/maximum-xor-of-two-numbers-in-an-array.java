@@ -1,71 +1,75 @@
-import java.util.*;
-
-class TrieNode {
-    TrieNode[] children;
-
-    TrieNode() {
-        this.children = new TrieNode[2];
-    }
-}
-
-class Trie {
-    TrieNode root;
-
-    Trie() {
-        root = new TrieNode();
-    }
-
-    // Inserts a number into the Trie
-    public void insert(int num) {
-        TrieNode current = root;
-
-        for (int i = 31; i >= 0; i--) {
-            int bit = (num >> i) & 1;
-            
-            if (current.children[bit] == null) {
-                current.children[bit] = new TrieNode();
-            }
-            current = current.children[bit];
-        }
-    }
-
-    // Finds the maximum XOR for a given number
-    public int findMaxXOR(int num) {
-        TrieNode current = root;
-        int maxXOR = 0;
-
-        for (int i = 31; i >= 0; i--) {
-            int bit = (num >> i) & 1;
-            int flipBit = bit ^ 1; // flip the bit to maximize XOR
-
-            if (current.children[flipBit] != null) {
-                maxXOR |= (1 << i); // Set the bit in the result
-                current = current.children[flipBit];
-            } 
-            else {
-                current = current.children[bit];
-            }
-        }
-        return maxXOR;
-    }
+class TrieNode{
+    TrieNode left;
+    TrieNode right;
 }
 
 class Solution {
-    public int findMaximumXOR(int[] nums) {
-        Trie trie = new Trie();
 
-        // Insert all numbers into the Trie
-        for (int i = 0; i < nums.length; i++) {
-            trie.insert(nums[i]);
+    public void insert(TrieNode root, int num){
+        TrieNode current = root;
+
+        for(int i = 31; i >= 0; i--){
+            int ithBit = (num >> i) & 1;
+
+            if(ithBit == 0){
+                if (current.left == null) {
+                    current.left = new TrieNode();
+                }
+                current = current.left;
+            }
+            else{
+                if (current.right == null) {
+                    current.right = new TrieNode();
+                }
+                current = current.right;
+            }
+        }
+    }
+
+    public int maxXorFunction(TrieNode root, int num) {
+    int maxXOR = 0;
+    TrieNode current = root;
+
+    for (int i = 31; i >= 0; i--){
+        int ithBit = (num >> i) & 1;
+
+        if (ithBit == 1){
+            if (current.left != null){
+                maxXOR += Math.pow(2, i);
+                current = current.left;
+            } 
+            else{
+                current = current.right;
+            }
+        } 
+
+        else {
+            if (current.right != null){
+                maxXOR += Math.pow(2, i);
+                current = current.right;
+            } 
+            else{
+                current = current.left;
+            }
+        }
+    }
+    return maxXOR;
+    }
+
+    public int findMaximumXOR(int[] arr) {
+        TrieNode root = new TrieNode();
+
+        // inserting elements in the trie
+        for(int i = 0; i < arr.length; i++){
+            insert(root, arr[i]);
         }
 
-        int maxXOR = Integer.MIN_VALUE;
+        int result = 0;
 
-        // Iterate through all numbers to find maximum XOR
-        for (int i = 0; i < nums.length; i++) {
-            maxXOR = Math.max(maxXOR, trie.findMaxXOR(nums[i]));
+        // finding the max. XOR
+        for(int i = 0 ; i < arr.length; i++){
+            result = Math.max(result, maxXorFunction(root, arr[i]));
         }
-
-        return maxXOR;
+        return result;
     }
 }
