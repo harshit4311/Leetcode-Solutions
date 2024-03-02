@@ -2,24 +2,21 @@ import java.util.PriorityQueue;
 
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
 
-        // Flatten the matrix and add elements to the min heap
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+            for (int j = 0; j < columns; j++) {
                 pq.add(matrix[i][j]);
+
+                if (pq.size() > k) {
+                    pq.poll();
+                }
             }
         }
 
-        // Remove the first k - 1 elements
-        for (int i = 0; i < k - 1; i++) {
-            pq.poll();
-        }
-
-        // Return the kth smallest element
         return pq.peek();
     }
 }
