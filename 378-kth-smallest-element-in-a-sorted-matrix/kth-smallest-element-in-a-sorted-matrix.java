@@ -1,25 +1,26 @@
+import java.util.PriorityQueue;
+
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
-       PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         
-        int n = matrix.length;
-        
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j< n; j++) {
-                
-                if(pq.size() < k) {
-                    pq.add(matrix[i][j]);
-                }
-                
-                else { //equal to k
-                    if (matrix[i][j] < pq.peek()) { //if incoming element is less than peek
-                        pq.poll();
-                        pq.add(matrix[i][j]);
-                    }
-                }
+        // Create a min heap
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        // Flatten the matrix and add elements to the min heap
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                pq.add(matrix[i][j]);
             }
         }
-        
+
+        // Remove the first k - 1 elements
+        for (int i = 0; i < k - 1; i++) {
+            pq.poll();
+        }
+
+        // Return the kth smallest element
         return pq.peek();
     }
 }
