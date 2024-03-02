@@ -5,7 +5,6 @@ class Solution {
         int rows = matrix.length;
         int cols = matrix[0].length;
         
-        // Create a min heap
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         // Flatten the matrix and add elements to the min heap
