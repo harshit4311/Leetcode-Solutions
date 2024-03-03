@@ -1,5 +1,8 @@
 class Solution {
     public int findContentChildren(int[] greed, int[] size) {
+
+        if(size.length == 0) return 0;
+        
         int count = 0;
         Arrays.sort(greed);
         Arrays.sort(size);
