@@ -16,7 +16,7 @@ class Solution {
             }
         }
 
-        // Returns the smallest no.of the minHeap 
+        // Returns the smallest no.of the minHeap that's the Kth largest element of the array
         return minHeap.peek();
     }
 }
