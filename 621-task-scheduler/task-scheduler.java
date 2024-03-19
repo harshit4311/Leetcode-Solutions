@@ -12,12 +12,8 @@ class Solution {
         int idle = chunk * n;
 
         for (int i = 24; i >= 0; i--) {
-            if (chunk > freq[i]) {
-                idle -= freq[i];
-            } 
-            else {
-                idle -= chunk;
-            }
+            if (chunk > freq[i]) idle -= freq[i];
+            else idle -= chunk;
         }
 
         if (idle < 0) return tasks.length;
