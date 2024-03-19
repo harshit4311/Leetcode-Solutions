@@ -22,6 +22,5 @@ class Solution {
 
         if (idle < 0) return tasks.length;
         else return tasks.length + idle;
-        
     }
 }
