@@ -18,7 +18,7 @@ class Solution {
     }
 
     public boolean find(char[][] board, int i, int j, String word, int index) {
-        if(index == word.length()) 
+        if(index >= word.length()) 
         return true;
 
         if(i < 0 || i >= m || j < 0 || j >= n || board[i][j] != word.charAt(index)) 
@@ -35,7 +35,7 @@ class Solution {
                 return true;
             }
         }
-        
+
         board[i][j] = temp;
         return false;
     }
