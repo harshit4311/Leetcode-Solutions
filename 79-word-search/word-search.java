@@ -1,5 +1,5 @@
 class Solution {
-    private boolean helper(char[][] arr, String word, int i, int j, int idx, int row, int col, int[][] visited) {
+    public boolean helper(char[][] arr, String word, int i, int j, int idx, int row, int col, int[][] visited) {
         if (i < 0 || j < 0 || i >= row || j >= col || visited[i][j] == 1) return false;
         if (word.charAt(idx) != arr[i][j]) return false;
         if (idx == word.length() - 1) return true;
@@ -29,5 +29,5 @@ class Solution {
         }
         return false;
     }
-    
+
 }
