@@ -17,9 +17,9 @@ class Solution {
             helper(cookies, start + 1, k, count);
             count[i] -= cookies[start];
 
-            if(count[i] == 0) {
-                break;
-            }
+            // if(count[i] == 0) {
+            //     break;
+            // }
         }
     }
 
