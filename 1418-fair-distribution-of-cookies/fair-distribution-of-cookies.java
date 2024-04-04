@@ -4,7 +4,6 @@ class Solution {
     public void helper(int[] cookies, int start, int k, int[] temp) {
         if(start == cookies.length) {
             int max = 0;
-
             for(int j = 0; j < temp.length; j++) {
                 max = Math.max(max, temp[j]);
             }
@@ -16,6 +15,10 @@ class Solution {
             temp[i] += cookies[start];
             helper(cookies, start + 1, k, temp);
             temp[i] -= cookies[start];
+
+            if(temp[i] == 0) {
+                break;
+            }
         }
     }
 
