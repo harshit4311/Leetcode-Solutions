@@ -12,17 +12,20 @@ class Solution {
         int first; 
         int second;
 
-        if(dp[n-1] != -1) 
+        if(dp[n-1] != -1) {
             first = dp[n-1];
-        else
+        }
+        else {
             first = fib(n-1);
+        }
 
 
-         if(dp[n-2] != -1) 
+        if(dp[n-2] != -1) {
             second = dp[n-2];
-        else
+        }
+        else {
             second = fib(n-2);
-
+        }
 
         return dp[n] = first + second;
     }
