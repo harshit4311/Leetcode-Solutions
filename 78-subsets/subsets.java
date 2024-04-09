@@ -1,24 +1,22 @@
-import java.util.*;
-
 class Solution {
+    public List<List<Integer>> result = new ArrayList<>();
+    
     public List<List<Integer>> subsets(int[] arr) {
-        List<List<Integer>> result = new ArrayList<>();
-        generateSubsequences(0, arr, new ArrayList<>(), result);
+        List<Integer> temp = new ArrayList<>();
+        solve(arr, 0, temp);
         return result;
     }
-    
-    public void generateSubsequences(int index, int[] arr, List<Integer> current, List<List<Integer>> result) {
-        if (index == arr.length) {
-            result.add(new ArrayList<>(current));
+
+    public void solve(int[] arr, int i, List<Integer> temp) {
+        if(i >= arr.length) {
+            result.add(new ArrayList<>(temp));
             return;
-        }
+        }   
         
-        // Include current element
-        current.add(arr[index]);
-        generateSubsequences(index + 1, arr, current, result);
-        
-        // Exclude current element
-        current.remove(current.size() - 1);
-        generateSubsequences(index + 1, arr, current, result);
+        temp.add(arr[i]);
+        solve(arr, i + 1, temp);
+
+        temp.remove(temp.size() - 1);
+        solve(arr, i + 1, temp);
     }
 }
