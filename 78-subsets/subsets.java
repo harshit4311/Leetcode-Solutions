@@ -8,7 +8,7 @@ class Solution {
     }
 
     public void solve(int[] arr, int i, List<Integer> temp) {
-        if(i >= arr.length) {
+        if(i >= arr.length) { // Base Case
             result.add(new ArrayList<>(temp));
             return;
         }   
