@@ -1,18 +1,19 @@
-class Solution {
+public class Solution {
+    int[] dp = new int[101];
+
     public int rob(int[] arr) {
-        if(arr.length == 0) return 0;
-        if(arr.length == 1) return arr[0];
-
-        int[] dp = new int[arr.length + 1];
-
-        dp[0] = 0; // If there are no houses, the profit is 0
-        dp[1] = arr[0]; // If there is only one house, the profit is the value of that house
-
-        for(int i = 2; i <= arr.length; i++) {
-            dp[i] = Math.max(arr[i - 1] + dp[i - 2], dp[i - 1]);
-        }
-
-        return dp[arr.length];
-        
+        Arrays.fill(dp, -1);
+        return solve(arr, 0);
     }
+
+    public int solve(int[] arr, int i) {
+        if (i >= arr.length) return 0;
+        if (dp[i] != -1) return dp[i];
+
+        int steal = arr[i] + solve(arr, i + 2); // steal this house and move to the alternate houses
+        int skip = solve(arr, i + 1); // skip this house and move to the next house
+
+        return dp[i] = Math.max(steal, skip);
+    }
+
 }
