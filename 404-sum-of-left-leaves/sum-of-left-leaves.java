@@ -19,21 +19,15 @@ class Solution {
 
         int sum = 0;
 
-        Stack<TreeNode> stack = new Stack<>();
-        stack.add(root);
-
-        while(!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-
-            // Checking if the node is a leaf node
-            if(node.left != null && node.left.left == null && node.left.right == null) {
-                sum += node.left.val;
-            }
-
-            // Pushing the right child first so it pops first 
-            if(node.right != null) stack.add(node.right);
-            if(node.left != null) stack.add(node.left);
+        // Checking if the left child is a leaf node
+        // (root.left.left == null) && (root.left.right == null) ensures its the leaf node
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            sum += root.left.val;
         }
+
+        // Iterating recursively on left and right subtrees
+        sum += sumOfLeftLeaves(root.left);
+        sum += sumOfLeftLeaves(root.right);
 
         return sum;
     }
