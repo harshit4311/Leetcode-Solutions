@@ -15,7 +15,7 @@
  */
 class Solution {
     public int sumNumbers(TreeNode root) {
-        return dfsSum(root, 0); // sum is initially 0
+        return dfsSum(root, 0); // Initially sum = 0
     }
 
     public int dfsSum(TreeNode root, int sum) {
@@ -23,6 +23,7 @@ class Solution {
 
         sum = (sum * 10) + root.val;
 
+        // We have reached the Leaf Node, now we move to another track
         if(root.left == null && root.right == null) {
             return sum;
         }
