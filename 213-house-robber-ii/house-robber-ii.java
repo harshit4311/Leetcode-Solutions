@@ -1,28 +1,33 @@
 class Solution {
-    public int rob(int[] arr) {
-        if(arr.length == 0) return 0;
-        if(arr.length == 1) return arr[0];
-        if(arr.length == 2) return Math.max(arr[0], arr[1]);
-
-        int robFirst = helper(arr, 0, arr.length - 2);
-        int robLast = helper(arr, 1, arr.length - 1);
-
-        return Math.max(robFirst, robLast);
-    }
-
-    public int helper(int[] arr, int start, int end) {
-        int prevRob = 0;
-        int prevNotRob = 0;
-
-        for(int i = start; i <= end; i++) {
-            int currentRob = prevNotRob + arr[i];
-            int currentNotRob = Math.max(prevRob, prevNotRob);
-
-            // Updating the previous values for the next iteration
-            prevNotRob = currentNotRob;
-            prevRob = currentRob;
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+        
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+        
+        // Calculate the maximum amount robbed up to each house 
+        for (int i = 2; i < n - 1; i++) {
+            dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
         }
-
-        return Math.max(prevRob, prevNotRob);
+        
+        // Store the maximum amount obtained without considering the FIRST house
+        int maxWithoutFirst = dp[n - 2];
+        
+        // Reset DP array for the second pass
+        dp[0] = 0;
+        dp[1] = nums[1];
+        
+        // Calculate the maximum amount robbed up to each house 
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
+        }
+        
+        // Store the maximum amount obtained without considering the LAST house
+        int maxWithoutLast = dp[n - 1];
+        
+        return Math.max(maxWithoutFirst, maxWithoutLast);
     }
 }
