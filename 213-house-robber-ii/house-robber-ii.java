@@ -1,31 +1,28 @@
 class Solution {
-    public int rob(int[] nums) {
-        if (nums.length == 0) return 0;
-        if (nums.length == 1) return nums[0];
-        if (nums.length == 2) return Math.max(nums[0], nums[1]);
+    public int rob(int[] arr) {
+        if(arr.length == 0) return 0;
+        if(arr.length == 1) return arr[0];
+        if(arr.length == 2) return Math.max(arr[0], arr[1]);
 
-        // Rob the first house and skip the last house
-        int robFirst = robHelper(nums, 0, nums.length - 2);
-
-        // Skip the first house and rob the last house
-        int robLast = robHelper(nums, 1, nums.length - 1);
+        int robFirst = helper(arr, 0, arr.length - 2);
+        int robLast = helper(arr, 1, arr.length - 1);
 
         return Math.max(robFirst, robLast);
     }
 
-    public int robHelper(int[] nums, int start, int end) {
-        int prevRob = 0; 
-        int prevNotRob = 0; 
-        
-        for (int i = start; i <= end; i++) {
-            int currentRob = prevNotRob + nums[i]; // Robbing the current house
-            int currentNotRob = Math.max(prevRob, prevNotRob); // Not robbing the current house
-            
-            // Update previous values for the next iteration
+    public int helper(int[] arr, int start, int end) {
+        int prevRob = 0;
+        int prevNotRob = 0;
+
+        for(int i = start; i <= end; i++) {
+            int currentRob = prevNotRob + arr[i];
+            int currentNotRob = Math.max(prevRob, prevNotRob);
+
+            // Updating the previous values for the next iteration
             prevNotRob = currentNotRob;
             prevRob = currentRob;
         }
-        
+
         return Math.max(prevRob, prevNotRob);
     }
 }
