@@ -26,7 +26,6 @@ class Solution {
             prevRob = currentRob;
         }
         
-        // Return the maximum of the two scenarios
         return Math.max(prevRob, prevNotRob);
     }
 }
