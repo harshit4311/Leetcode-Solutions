@@ -1,19 +1,27 @@
 class Solution {
     public int uniquePaths(int m, int n) {
         int[][] dp = new int[m][n];
-        return helper(m, n, 0, 0, dp);
+    
+        // Initially, fill the DP array with -1
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                dp[i][j] = -1;
+            }
+        } 
+
+        return helper(0, 0, m, n, dp);
     }
 
-    public static int helper(int m, int n, int i, int j, int[][] dp) {
-        // Base Cases
-        if(i >= m || j >= n) return 0;
-        if(i == m -1 || j == n -1) return 1; // This is the last row/column and there's just 1 option left
+    public int helper(int i, int j, int m, int n, int[][] dp) {
+        if(i == m - 1 && j == n - 1) return 1; // We reached the end
+        if(i >=m || j >= n) return 0; // Index out of bounds
 
-        if(dp[i][j] != 0) {
-            return dp[i][j];
-        }
+        if(dp[i][j] != -1) return dp[i][j];
 
-        dp[i][j] = helper(m, n, i + 1, j, dp) + helper(m, n, i, j + 1, dp);
+        int down = helper(i + 1, j, m, n, dp);
+        int right = helper(i, j + 1, m, n, dp);
+
+        dp[i][j] = down + right; // Memoize(Store) the result
 
         return dp[i][j];
     }
