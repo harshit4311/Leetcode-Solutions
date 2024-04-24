@@ -30,7 +30,6 @@ class Solution {
         int right = helper(i, j + 1, m, n, grid, dp);
         int down = helper(i + 1, j, m, n, grid, dp);
 
-        dp[i][j] = right + down;
         dp[i][j] = Math.min(right, down) + grid[i][j];
 
         return dp[i][j];
