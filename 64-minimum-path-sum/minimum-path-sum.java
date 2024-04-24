@@ -1,27 +1,32 @@
 class Solution {
     public int minPathSum(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-        
+        int m = grid.length; // Rows
+        int n = grid[0].length; // Columns
+
         int[][] dp = new int[m][n];
-        
-        // Initialize the dp table with values from the grid
-        dp[0][0] = grid[0][0];
-        for (int i = 1; i < m; i++) {
-            dp[i][0] = dp[i-1][0] + grid[i][0];
-        }
-        for (int j = 1; j < n; j++) {
-            dp[0][j] = dp[0][j-1] + grid[0][j];
-        }
-        
-        // Traverse the grid and update dp table
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+
+        // Fill the dp grid with -1
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                dp[i][j] = -1;
             }
         }
-        
-        // Minimum path sum from top-left to bottom-right
-        return dp[m-1][n-1];
+
+        return helper(0, 0, m, n, grid, dp);
     }
+
+    public int helper(int i, int j, int m, int n, int[][] grid, int[][] dp) {
+        if (i == m - 1 && j == n - 1) return grid[i][j]; // Reached the end of the grid
+        if (i >= m || j >= n) return Integer.MAX_VALUE; // Array index of bounds
+        if(dp[i][j] != -1) return dp[i][j];
+
+        int right = helper(i, j + 1, m, n, grid, dp);
+        int down = helper(i + 1, j, m, n, grid, dp);
+
+        dp[i][j] = right + down;
+        dp[i][j] = Math.min(right, down) + grid[i][j];
+
+        return dp[i][j];
+    }
+
 }
