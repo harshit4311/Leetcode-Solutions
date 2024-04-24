@@ -16,9 +16,16 @@ class Solution {
     }
 
     public int helper(int i, int j, int m, int n, int[][] grid, int[][] dp) {
+        // Base
+        // Pruning
+        // Check
+        // Process
+        // Store
+        // Return
+
         if (i == m - 1 && j == n - 1) return grid[i][j]; // Reached the end of the grid
         if (i >= m || j >= n) return Integer.MAX_VALUE; // Array index of bounds
-        if(dp[i][j] != -1) return dp[i][j];
+        if(dp[i][j] != -1) return dp[i][j]; // Check
 
         int right = helper(i, j + 1, m, n, grid, dp);
         int down = helper(i + 1, j, m, n, grid, dp);
