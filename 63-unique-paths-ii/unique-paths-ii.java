@@ -1,50 +1,52 @@
 class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int rows = obstacleGrid.length;
-        int cols = obstacleGrid[0].length;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
 
-        int[][] dp = new int[rows][cols];
+        // Dynamic programming array to store the number of unique paths
+        int[][] dp = new int[m][n];
 
-        // Initialize the first cell
-        if(obstacleGrid[0][0] == 1) {
-            dp[0][0] = 0;
-        } 
-        else {
-            dp[0][0] = 1;
-        }
-
-        // Find no.of paths for the first row
-        for(int i = 1; i < rows; i++) {
-            if (obstacleGrid[i][0] == 0) {
-                dp[i][0] = dp[i - 1][0];
-            }
-            else {
-                dp[i][0] = 0;
+        // Initialize DP array
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                dp[i][j] = -1;
             }
         }
 
-        // Find no.of paths for the first columnn
-        for(int j = 1; j < cols; j++) {
-            if(obstacleGrid[0][j] == 0) {
-                dp[0][j] = dp[0][j - 1];
-            }
-            else {
-                dp[0][j] = 0;
+        // Start recursion from the top-left corner
+        return helper(0, 0, m, n, dp, obstacleGrid);
+    }
+
+    public int helper(int i, int j, int m, int n, int[][] dp, int[][] obstacleGrid) {
+        // Check for out-of-bounds
+        if (i >= m || j >= n) return 0;
+
+        // If reached the destination (bottom-right corner)
+        if (i == m - 1 && j == n - 1) {
+            // If there's an obstacle at the destination, return 0
+            if (obstacleGrid[i][j] == 1) {
+                return 0;
+            } else {
+                return 1;
             }
         }
 
-        // Adding the no.of paths 
-        for(int i = 1; i < rows; i++) {
-            for(int j = 1; j < cols; j++) {
-                if(obstacleGrid[i][j] == 0) {
-                    dp[i][j] = dp[i -1][j] + dp[i][j - 1];
-                }
-                else {
-                    dp[i][j] = 0; // If the cell is an obstacle, no paths are possible
-                }
-            }
+        // If already calculated, return the value from DP array
+        if (dp[i][j] != -1) return dp[i][j];
+
+        // If there's an obstacle at the current position, mark it as 0 and return 0
+        if (obstacleGrid[i][j] == 1) {
+            dp[i][j] = 0;
+            return 0;
         }
 
-        return dp[rows -1][cols - 1];
+        // Calculate the number of unique paths recursively
+        int right = helper(i + 1, j, m, n, dp, obstacleGrid);
+        int down = helper(i, j + 1, m, n, dp, obstacleGrid);
+
+        // Store the calculated value in DP array
+        dp[i][j] = right + down;
+
+        return dp[i][j];
     }
 }
