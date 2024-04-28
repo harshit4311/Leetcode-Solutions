@@ -15,25 +15,25 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>(); // Will store all currentLevels (currentLevel contains nodes at each level)
         Queue<TreeNode> queue = new LinkedList<>();
-        List<List<Integer>> list = new LinkedList<List<Integer>>();
 
-        if(root == null) return list;
+        if(root == null) return result;
+        queue.add(root);
 
-        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> currentLevel = new ArrayList<>(); // Will store all nodes at a particular level
 
-        while(!queue.isEmpty()){
-            int levels = queue.size();
-            List<Integer> sublist = new LinkedList<Integer>();
+            for(int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                currentLevel.add(node.val);
 
-            for(int i = 0; i < levels; i++){
-                if(queue.peek().left != null) queue.offer(queue.peek().left);
-                if(queue.peek().right != null) queue.offer(queue.peek().right);
-                
-                sublist.add(queue.poll().val);
+                if(node.left != null) queue.add(node.left);
+                if(node.right != null) queue.add(node.right);
             }
-            list.add(sublist);
+            result.add(currentLevel); // Add nodes at each level
         }
-        return list;
+        return result;
     }
 }
