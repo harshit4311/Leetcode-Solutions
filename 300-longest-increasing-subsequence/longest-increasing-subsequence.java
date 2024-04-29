@@ -1,26 +1,24 @@
 class Solution {
-    public int lengthOfLIS(int[] nums) {
-        int[] arr = new int[nums.length];
+    public int lengthOfLIS(int[] arr) {
+        int maxLength = 0;
 
-        int max = 0;
-
-        for(int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             int start = 0;
-            int end = max;
-            int n = nums[i];
+            int end = maxLength;
 
-            while(start < end) {
+            while (start < end) {
                 int mid = start + (end - start) / 2;
                 
-                if(arr[mid] < n) start = mid + 1;
-                else end = mid;
-            }
-            arr[start] = n;
+                if (arr[mid] < arr[i]) 
+                    start = mid + 1;
+                else 
+                    end = mid;
+            }   
+            arr[start] = arr[i];
 
-            // If we reach the end, increment the max
-            if(start == max) max++;
+            // If we reach the end, increment the maxLength
+            if (start == maxLength) maxLength++;
         }
-
-        return max;
+        return maxLength;
     }
 }
