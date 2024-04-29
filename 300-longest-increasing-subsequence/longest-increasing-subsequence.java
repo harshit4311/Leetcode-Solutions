@@ -9,10 +9,8 @@ class Solution {
             while (start < end) {
                 int mid = start + (end - start) / 2;
                 
-                if (arr[mid] < arr[i]) 
-                    start = mid + 1;
-                else 
-                    end = mid;
+                if (arr[mid] < arr[i]) start = mid + 1;
+                else end = mid;
             }   
             arr[start] = arr[i];
 
