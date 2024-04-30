@@ -16,29 +16,24 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
+
+        if (root == null) return result;
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            int levels = queue.size();
+            int size = queue.size();
             Integer rightMost = null;
 
-            for (int i = 0; i < levels; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode current = queue.poll();
 
                 // Update rightMost value for each level
                 rightMost = current.val;
 
-                if (current.left != null) {
-                    queue.add(current.left);
-                }
-                if (current.right != null) {
-                    queue.add(current.right);
-                }
+                if (current.left != null) queue.add(current.left);
+                if (current.right != null) queue.add(current.right);
             }
 
             // Add the rightmost value of the current level to the result
