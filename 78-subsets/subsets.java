@@ -1,22 +1,22 @@
 class Solution {
-    public List<List<Integer>> result = new ArrayList<>();
-    
     public List<List<Integer>> subsets(int[] arr) {
-        List<Integer> temp = new ArrayList<>();
-        solve(arr, 0, temp);
-        return result;
+        List<List<Integer>> list = new ArrayList<>();
+        helper(0, new ArrayList<>(), arr, list);
+        return list;
     }
 
-    public void solve(int[] arr, int i, List<Integer> temp) {
-        if(i >= arr.length) { // Base Case
-            result.add(new ArrayList<>(temp));
+    public void helper(int index, List<Integer> current, int[] arr, List<List<Integer>> result) {
+        if (index == arr.length) {
+            result.add(new ArrayList<>(current)); // Add a copy of current list to the result
             return;
-        }   
-        
-        temp.add(arr[i]);
-        solve(arr, i + 1, temp);
+        }
 
-        temp.remove(temp.size() - 1);
-        solve(arr, i + 1, temp);
+        // Include the current element
+        current.add(arr[index]);
+        helper(index + 1, current, arr, result);
+
+        // Exclude the current element
+        current.remove(current.size() - 1);
+        helper(index + 1, current, arr, result);
     }
 }
