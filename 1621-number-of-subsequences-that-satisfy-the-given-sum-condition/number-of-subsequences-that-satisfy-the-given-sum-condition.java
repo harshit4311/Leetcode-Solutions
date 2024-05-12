@@ -1,6 +1,6 @@
 class Solution {
     public int numSubseq(int[] arr, int target) {
-        int MOD = 1000000007;
+        int MOD = 1_000_000_007;
         Arrays.sort(arr);
 
         long[] powerOfTwoArray = new long[arr.length];
