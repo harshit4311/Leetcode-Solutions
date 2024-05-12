@@ -17,12 +17,15 @@ class Solution {
         long count = 0;
 
         while(start <= end) {
-            if(arr[start] + arr[end] > target) {
-                end--;
-            }
-            else {
-                count = (count + powerOfTwoArray[end - start]) % MOD;
+            int sum = arr[start] + arr[end];
+
+            if (sum <= target) {
+                count += powerOfTwoArray[end - start];
+                count %= MOD;
                 start++;
+            } 
+            else {
+                end--;
             }
         }
 
