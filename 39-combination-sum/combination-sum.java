@@ -1,28 +1,27 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] arr, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        List<Integer> current = new ArrayList<>();
-        
-        helper(0, arr, target, current, result);
-        return result;
+        List<List<Integer>> list = new ArrayList<>();
+
+        helper(0, target, arr, new ArrayList<>(), list);
+        return list;
     }
 
-    public void helper(int i, int[] arr, int target, List<Integer> current, List<List<Integer>> result) {
+    public void helper(int i, int target, int[] arr, List<Integer> tempList, List<List<Integer>> list) {
         if(target == 0) {
-            result.add(new ArrayList<>(current));
+            list.add(new ArrayList<>(tempList));
             return;
         }
 
-        if(target < 0 || i == arr.length) {
+        if(target < 0 || i >= arr.length) {
             return;
         }
 
-        // Case 1: Include current element
-        current.add(arr[i]);
-        helper(i, arr, target - arr[i], current, result);
-        current.remove(current.size() - 1);
+        // Take the current index
+        tempList.add(arr[i]);
+        helper(i, target - arr[i], arr, tempList, list);
+        tempList.remove(tempList.size() - 1); // Backtrack
 
-        // Case 2: Exclude current element and move to next
-        helper(i + 1, arr, target, current, result);
+        // Don't take the current index
+        helper(i + 1, target, arr, tempList, list);
     }
 }
