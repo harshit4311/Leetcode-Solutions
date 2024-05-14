@@ -1,7 +1,7 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] arr, int target) {
         Arrays.sort(arr);
-        
+
         List<List<Integer>> list = new ArrayList<>();
 
         helper(0, target, arr, list, new ArrayList<>());
@@ -24,7 +24,7 @@ class Solution {
         }
         
         // Skip all duplicates
-        while(i + 1 < arr.length && arr[i] == arr[i + 1]) {
+        while((i + 1 <= arr.length - 1) && (arr[i] == arr[i + 1])) {
             i++;
         }
 
