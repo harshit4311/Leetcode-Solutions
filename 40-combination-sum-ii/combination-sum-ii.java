@@ -20,7 +20,7 @@ class Solution {
         if(arr[i] <= target) {
             ds.add(arr[i]);
             helper(i + 1, target - arr[i], arr, list, ds);
-            ds.remove(ds.size() - 1);
+            ds.remove(ds.size() - 1); // Backtrack
         }
         
         // Skip all duplicates
