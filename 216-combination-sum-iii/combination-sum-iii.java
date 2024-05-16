@@ -8,13 +8,18 @@ class Solution {
     }
 
     public void helper(int[] arr, int i, int n, int target, List<List<Integer>> list, List<Integer> ds) {
-        if(target == 0 && ds.size() == n) {
+         
+        // Valid combination. So, we add it in our list
+        if(target == 0 && ds.size() == n ) {
             list.add(new ArrayList<>(ds));
-            return;
+            return; // Backtrack to find another unique combination
         }
 
+        // target < 0: If the target becomes negative, it means we've overshot the required sum, so we stop further exploration of this path.
+        // i == arr.length: If i reaches the end of the array arr, it means we've explored all available elements, so we stop further recursion.
+        // ds.size() >= n: If the size of the current combination ds becomes equal to or greater than n, it means we've used up more elements than allowed, so we stop further exploration of this path.
         if(target < 0 || i == arr.length || ds.size() >= n) {
-            return;
+            return; // Backtrack to find a valid combination
         }
 
         // Take the current element
