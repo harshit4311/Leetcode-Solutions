@@ -2,6 +2,7 @@ class Solution {
     public List<List<String>> solveNQueens(int n) {
         char[][] board = new char[n][n];
 
+        // Fill the whole board with '.' initially
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
                 board[i][j] = '.';
