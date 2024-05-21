@@ -14,10 +14,10 @@ class Solution {
 
         // Take
         ds.add(arr[i]);
-        helper(i + 1, arr, list, ds);
+        helper(i + 1, arr, list, ds); // Move to the next element as we don't want duplicates
         ds.remove(ds.size() - 1);
 
         // Don't Take
-        helper(i + 1, arr, list, ds);
+        helper(i + 1, arr, list, ds); // Move to the next element
     }
 }
