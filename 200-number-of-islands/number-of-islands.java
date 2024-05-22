@@ -10,17 +10,16 @@ class Solution {
         }
 
         int islandCount = 0;
-
         m = grid.length;
         n = grid[0].length;
+        boolean[][] visited = new boolean[m][n]; // Initialize visited array
 
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
-
                 // Found a new island
-                if(grid[i][j] == '1') {
+                if(grid[i][j] == '1' && !visited[i][j]) {
                     islandCount++;
-                    dfs(grid, i, j);
+                    dfs(grid, visited, i, j);
                 }
             }
         }
@@ -28,16 +27,16 @@ class Solution {
         return islandCount;
     }
 
-    public void dfs(char[][] grid, int i, int j) {
-        if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') {
+    public void dfs(char[][] grid, boolean[][] visited, int i, int j) {
+        if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1' || visited[i][j]) {
             return; // Backtrack
         }
 
-        grid[i][j] = '0'; // Mark as visited
+        visited[i][j] = true; // Mark as visited
 
-        dfs(grid, i - 1, j); // Up
-        dfs(grid, i, j + 1); // Right
-        dfs(grid, i + 1, j); // Down
-        dfs(grid, i, j - 1); // Left
+        dfs(grid, visited, i - 1, j); // Up
+        dfs(grid, visited, i, j + 1); // Right
+        dfs(grid, visited, i + 1, j); // Down
+        dfs(grid, visited, i, j - 1); // Left
     }
 }
