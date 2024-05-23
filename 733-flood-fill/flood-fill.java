@@ -19,19 +19,21 @@ class Solution {
         int m = grid.length;
         int n = grid[0].length;
 
-        // Fill the current cell with the new color
+        // Fill the current cell with newColor
         grid[sr][sc] = newColor;
 
-        // Visit all the four directions
-        for (int i = 0; i < 4; i++) {
-            int new_row = sr + d_row[i];
-            int new_col = sc + d_col[i];
+        // Traverse in all 4 directions
+        for(int i = 0; i < 4; i++) {
+            int new_row = sr + d_row[i]; // New Row Index
+            int new_col = sc + d_col[i]; // New Column Index
 
-            // Check if the new position is within the boundaries of the grid and is not colored yet
-            if (new_row >= 0 && new_row < m && new_col >= 0 && new_col < n
+            // Check if new Row & Column indices are within the boundaries 
+            // and whether the current cell is still filled with the initialColor
+            // If it is still filled with initialColor, fill newColor in it using DFS
+            if(new_row >= 0 && new_row <= m - 1 && new_col >= 0 && new_col <= n - 1
                 && grid[new_row][new_col] == initialColor) {
-                dfs(new_row, new_col, initialColor, newColor, grid, d_row, d_col);
-            } 
+                    dfs(new_row, new_col, initialColor, newColor, grid, d_row, d_col);
+                }
         }
     }
 }
