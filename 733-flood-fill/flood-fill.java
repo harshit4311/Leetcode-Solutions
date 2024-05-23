@@ -1,5 +1,7 @@
 class Solution {
     public int[][] floodFill(int[][] grid, int sr, int sc, int newColor) {
+        
+        // Find initialColor by checking the cell-> grid[sr][sc] 
         int initialColor = grid[sr][sc];
         
         // If the initial color is the same as the new color, we will return the same(original grid) as no operation is to be performed
