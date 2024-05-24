@@ -17,41 +17,44 @@ class Solution {
         boolean[][] visited = new boolean[m][n];
         Queue<Pair> queue = new LinkedList<>();
 
-        // Add all zero cells to the queue and mark them as visited
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == 0) {
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(matrix[i][j] == 0) {
                     queue.add(new Pair(i, j));
                     visited[i][j] = true;
                 }
             }
         }
 
-        // Call the BFS function to update distances
-        bfs(queue, m, n, visited, newMatrix);
+        BFS(queue, m, n, visited, newMatrix);
         return newMatrix;
     }
 
-    public void bfs(Queue<Pair> queue, int m, int n, boolean[][] visited, int[][] newMatrix) {
-        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    public void BFS(Queue<Pair> queue, int m, int n, boolean[][] visited, int[][] newMatrix) {
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, 1, 0, -1};
 
-        while (!queue.isEmpty()) {
+        while(!queue.isEmpty()) {
             Pair current = queue.poll();
             int row = current.row;
             int col = current.col;
 
-            for (int[] direction : directions) {
-                int newRow = row + direction[0];
-                int newCol = col + direction[1];
+            for(int i = 0; i < 4; i++) {
+                int new_row = row + d_row[i];
+                int new_col = col + d_col[i];
 
                 // Check if the new cell is within bounds and not visited
-                if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && !visited[newRow][newCol]) {
-                    
-                    // Update the distance in the newMatrix
-                    newMatrix[newRow][newCol] = newMatrix[row][col] + 1;
+                // If yes, 
+                // Update/Increment the distance by 1 
+                if(new_row >= 0 && new_row < m && new_col >= 0 && new_col < n
+                    && !visited[new_row][new_col]) {
+
+                    // Incrementing the dist. by 1
+                    newMatrix[new_row][new_col] = newMatrix[row][col] + 1;
+
                     // Mark the cell as visited and add it to the queue
-                    visited[newRow][newCol] = true;
-                    queue.add(new Pair(newRow, newCol));
+                    visited[new_row][new_col] = true;
+                    queue.add(new Pair(new_row, new_col));
                 }
             }
         }
