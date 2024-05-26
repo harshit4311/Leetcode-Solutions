@@ -31,8 +31,10 @@ class Solution {
         while (!queue.isEmpty()) {
             int node = queue.poll();
 
-            for(int i = 0; i < graph[node].length; i++) {
-                int neighbor = graph[node][i];
+            for(int i = 0; i < graph[node].length; i++) { // graph[node] gives you the list of nodes that are directly connected to node
+            // graph[0] returns {1, 3}. That means nodes -> 1 and 3 are connected to node -> 0
+
+                int neighbor = graph[node][i]; // Access the 'i'th neighbor of the node
 
                 // If the neighbor has not been colored, color it with the opposite color
                 if(color[neighbor] == -1) {
