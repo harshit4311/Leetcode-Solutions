@@ -1,41 +1,29 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-        int n = isConnected.length; // its an NxN matrix, so no.of rows = no.of columns
+        int n = isConnected.length;
 
-        boolean[] visited = new boolean[n];
+        boolean[] isVisited = new boolean[n];
 
-        int provinceCount = 0;
+        int count = 0;
 
         for(int i = 0; i < n; i++) {
-
-            // If the city has not been visited, we have found a new province and we increment the counter
-            if(!visited[i]) {
-                provinceCount++;
-                bfs(i, visited, isConnected);
+            if(!isVisited[i]) {
+                count++;
+                DFS(i, isVisited, isConnected);
             }
         }
 
-        return provinceCount;
+        return count;
     }
 
-    public void bfs(int start, boolean[] visited, int[][] isConnected) {
-        int n = isConnected.length;
+    public void DFS(int start, boolean[] isVisited, int[][] isConnected) {
+        isVisited[start] = true;
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
+        for(int i = 0; i < isConnected.length; i++) {
 
-        visited[start] = true;
-
-        while(!queue.isEmpty()) {
-            int city = queue.poll();
-
-            for(int i = 0; i < n; i++) {
-
-                // If there is a connection between cities and the city has not been visited yet
-                if(isConnected[city][i] == 1 && !visited[i]) {
-                    queue.add(i);
-                    visited[i] = true;
-                } 
+             // If there is a connection between cities and the city has not been visited yet
+            if(isConnected[start][i] == 1 && !isVisited[i]) {
+                DFS(i, isVisited, isConnected);
             }
         }
     }
