@@ -5,6 +5,11 @@ class Solution {
             return false;
         }
 
+
+        if(groupSize == 1) {
+            return true;
+        }
+
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         // Add all elements to the PQ
