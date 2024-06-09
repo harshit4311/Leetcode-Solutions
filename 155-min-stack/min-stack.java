@@ -1,50 +1,34 @@
 class MinStack {
-    public Stack<Integer> stack;
-    public Stack<Integer> minStack;
-
+    Deque<Integer> stack;
+    Deque<Integer> minQueue;
+    
     public MinStack() {
-        stack = new Stack<>();
-        minStack = new Stack<>();    
+        stack = new ArrayDeque<>();
+        minQueue = new ArrayDeque<>();
     }
     
     public void push(int val) {
+        stack.push(val);
 
-        // Push val in 'stack'
-        stack.push(val); 
-
-        // Push val in 'minStack'
-        if(minStack.isEmpty() || val <= minStack.peek()) {
-            minStack.push(val);
+        if(minQueue.isEmpty() || !minQueue.isEmpty() && val <= minQueue.getFirst()) {
+            minQueue.push(val);
         }
-
     }
     
     public void pop() {
-
-        if(stack.isEmpty()) {
-            return;
+        if(!minQueue.isEmpty() && stack.peek() <= minQueue.getFirst()) {
+            minQueue.pop();
         }
 
-        int removedElement = stack.pop();
-        if(removedElement == minStack.peek()) {
-            minStack.pop();
-        }
+        stack.pop();
     }
     
     public int top() {
-
-        if (stack.isEmpty()) {
-            return -1; // No elements to show the top-most element in the stack
-        }
-
         return stack.peek();
     }
     
     public int getMin() {
-         if (minStack.isEmpty()) {
-            return -1; // No elements to show the minimum element of the stack
-        }
-        return minStack.peek();
+        return minQueue.getFirst();
     }
 }
 
