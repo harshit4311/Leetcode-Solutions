@@ -1,32 +1,37 @@
 class Solution {
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
-        List<Integer> resultList = new ArrayList<>();
+        int length = 0;
+        for(int i = 0; i < arr1.length; i++){
+            length = Math.max(length, arr1[i]);
+        }
 
-        for(int i = 0; i < arr2.length; i++) {
-            for(int j = 0; j < arr1.length; j++) {
+        // Count array where each index represents the frequency of the current element
+        int[] count = new int[length + 1];
+        for(int i = 0; i < arr1.length; i++){
+            count[arr1[i]]++;
+        }
 
-                if(arr1[j] == arr2[i]) {
-                    resultList.add(arr1[j]);
-                    arr1[j] = -1;
-                }
+        // Place elements from arr2 in the 'ans' array
+        int[] ans = new int[arr1.length];
+        int index = 0;
+
+        for(int i = 0; i < arr2.length; i++){
+            while(count[arr2[i]] > 0){
+                ans[index] = arr2[i];
+                index++;
+                count[arr2[i]]--;
             }
         }
 
-        Arrays.sort(arr1);
-
-        // Add the remaining elements of arr1 to resultList
-        for(int i = 0; i < arr1.length; i++) {
-            if(arr1[i] != -1) {
-                resultList.add(arr1[i]);
+        // Place all remaining elements of arr2(that are not present in arr1) in sorted order
+        for(int i = 0; i < count.length; i++){
+            while(count[i] > 0){
+                ans[index] = i;
+                index++;
+                count[i]--;
             }
-        }   
-
-        // Convert resultList to resultArr because the function wants an output in integer array
-        int[] resultArr = new int[resultList.size()];   
-        for(int i = 0; i < resultArr.length; i++) {
-            resultArr[i] = resultList.get(i);
         }
-
-        return resultArr;
+        
+        return ans;
     }
 }
