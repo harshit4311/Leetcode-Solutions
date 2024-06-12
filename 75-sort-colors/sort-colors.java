@@ -1,36 +1,43 @@
 class Solution {
     public void sortColors(int[] arr) {
-        int n = arr.length;
-        
-        // <color, frequency> map
-        HashMap<Integer, Integer> colorCount = new HashMap<>();
+        int zeroCount = 0;
+        int oneCount = 0;
+        int twoCount = 0;
 
-        // Initialising the map with count = 0 for all colors
-        colorCount.put(0, 0);
-        colorCount.put(1, 0);
-        colorCount.put(2, 0);
-
-        // Count the occurences of each color 
+        // Count occurrences of all the colors
         for(int i = 0; i < arr.length; i++) {
-            int number = arr[i];
-            colorCount.put(number, colorCount.get(number) + 1);
+            if(arr[i] == 0) {
+                zeroCount++;
+            }
+
+            else if(arr[i] == 1) {
+                oneCount++;
+            }
+
+            // arr[i] == 2
+            else { 
+                twoCount++;
+            }
         }
 
         int index = 0;
 
-        // Add all 0's in the array
-        for (int i = 0; i < colorCount.get(0); i++) {
-            arr[index++] = 0;
+        // Firstly, place all 0's in the array
+        for(int i = 0; i < zeroCount; i++) {
+            arr[index] = 0;
+            index++;
         }
-        
-        // Add all 1's in the array
-        for (int i = 0; i < colorCount.get(1); i++) {
-            arr[index++] = 1;
+
+        // Place all 1's in the array (after all 0's are placed)
+        for(int i = 0; i < oneCount; i++) {
+            arr[index] = 1;
+            index++;
         }
-        
-        // Add all 2's in the array
-        for (int i = 0; i < colorCount.get(2); i++) {
-            arr[index++] = 2;
+
+        // Place all 2's in the array (after all 0's and 1's are placed)
+        for(int i = 0; i < twoCount; i++) {
+            arr[index] = 2;
+            index++;
         }
 
     }
