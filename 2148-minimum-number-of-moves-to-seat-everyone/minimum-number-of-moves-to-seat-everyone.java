@@ -23,13 +23,13 @@ class Solution {
         int j = 0;
         int countMoves = 0;
 
-        while (i < 101 && j < 101) {
-            if (positionSeats[i] == 0) {
+        while(i < 101 && j < 101) {
+            if(positionSeats[i] == 0) {
                 i++;
                 continue;
             }
             
-            if (positionStudents[j] == 0) {
+            if(positionStudents[j] == 0) {
                 j++;
                 continue;
             }
