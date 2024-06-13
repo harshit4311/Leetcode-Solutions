@@ -1,3 +1,4 @@
+
 class Solution {
     public int minMovesToSeat(int[] seats, int[] students) {
         int n = seats.length;
@@ -14,7 +15,7 @@ class Solution {
         }
 
         // Count the number of students at each position
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             positionStudents[students[i]]++;
         }
 
@@ -22,21 +23,21 @@ class Solution {
         int j = 0;
         int countMoves = 0;
 
-        while(i < 101 && j < 101) {
-            if(positionSeats[i] == 0) {
+        while (i < 101 && j < 101) {
+            if (positionSeats[i] == 0) {
                 i++;
                 continue;
             }
             
-            if(positionStudents[j] == 0) {
+            if (positionStudents[j] == 0) {
                 j++;
                 continue;
             }
 
-            int minCount = Math.min(positionSeats[i], positionStudents[j]);
-            countMoves += minCount * Math.abs(i - j);
-            positionSeats[i] -= minCount;
-            positionStudents[j] -= minCount;
+            // Calculate the number of moves for one student to the seat
+            countMoves += Math.abs(i - j);
+            positionSeats[i]--;
+            positionStudents[j]--;
         }
 
         return countMoves;
