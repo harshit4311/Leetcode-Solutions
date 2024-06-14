@@ -6,9 +6,9 @@ class Solution {
 
         for(int i = 1; i < arr.length; i++) {
             if(arr[i] <= arr[i - 1]) {
-                int incrementBy = arr[i - 1] - arr[i] + 1;
-                arr[i] += incrementBy;
-                count+= incrementBy;
+                int incrementByValue = arr[i - 1] - arr[i] + 1;
+                arr[i] += incrementByValue;
+                count+= incrementByValue;
             }
         }
 
