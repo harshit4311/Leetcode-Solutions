@@ -2,8 +2,7 @@ class Solution {
     public int minDays(int[] arr, int m, int k) {
         int n = arr.length;
 
-        if (m * k > n) {
-            // If the total number of flowers needed is greater than available flowers
+        if (n < m * k) {
             return -1;
         }
 
@@ -22,7 +21,8 @@ class Solution {
             if(canMakeBouquets(arr, mid, k) >= m) {
                 minDaysResult = mid;
                 end = mid - 1;
-            } else {
+            } 
+            else {
                 start = mid + 1;
             }
         }
@@ -37,7 +37,8 @@ class Solution {
         for(int i = 0; i < arr.length; i++) {
             if(arr[i] <= mid) {
                 consecutiveFlowersCount++;
-            } else {
+            } 
+            else {
                 consecutiveFlowersCount = 0;
             }
 
