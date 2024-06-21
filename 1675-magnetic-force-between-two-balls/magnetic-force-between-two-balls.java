@@ -27,7 +27,7 @@ class Solution {
     }
 
     public boolean isPossibleToPlaceBalls(int force, int m, int[] positionArr) {
-        int prevPosition= positionArr[0];
+        int prevPosition = positionArr[0];
 
         int ballsPlaced = 1;
 
