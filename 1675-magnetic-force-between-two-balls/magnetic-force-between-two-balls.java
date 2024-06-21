@@ -5,6 +5,8 @@ class Solution {
         int n = positionArr.length;
 
         int minForce = 1;
+
+        // 'maxForce' can also be written as = positionArr[n - 1] - positionArr[0]
         int maxForce = (int) Math.ceil(positionArr[n - 1] / (m - 1.0));
         int result = 0;
 
