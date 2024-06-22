@@ -8,6 +8,7 @@ class Solution {
 
         // 'maxForce' can also be written as = positionArr[n - 1] - positionArr[0]
         int maxForce = (int) Math.ceil(positionArr[n - 1] / (m - 1.0));
+
         int result = 0;
 
         while(minForce <= maxForce) {
@@ -32,19 +33,16 @@ class Solution {
         int ballsPlaced = 1;
 
         for(int i = 1; i < positionArr.length; i++) {
-            int currentPosition = positionArr[i];
-
-            if(currentPosition - prevPosition >= force) {
+            if(positionArr[i] - prevPosition >= force) {
                 ballsPlaced++;
-
-                prevPosition = currentPosition;
+                prevPosition = positionArr[i];
             }
 
             if(ballsPlaced == m) {
-                break;
+                return true;
             }
         }
 
-        return ballsPlaced == m;
+        return false;
     }
 }
