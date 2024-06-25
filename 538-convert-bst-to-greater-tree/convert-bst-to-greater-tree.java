@@ -26,11 +26,14 @@ class Solution {
             return;
         }
 
+        // Traverse the right subtree first
         reverseOrderTraversal(root.right);
 
+        // Update the node's value with the current sum        
         sum += root.val;
         root.val = sum;
-        
+
+        // Traverse the left subtree
         reverseOrderTraversal(root.left);
     }
 }
