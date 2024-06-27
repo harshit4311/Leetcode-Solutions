@@ -1,24 +1,14 @@
 class Solution {
     public int findCenter(int[][] edges) {
-        Map<Integer, Integer> map = new HashMap<>();
-        
-        // Count degrees of each node
-        for(int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
+        int a = edges[0][0];
+        int b = edges[0][1];
+
+        if(a == edges[1][0] || a == edges[1][1]) {
+            return a;
+        }
+        else {
+            return b;
+        } 
             
-            map.put(u, map.getOrDefault(u, 0) + 1);
-            map.put(v, map.getOrDefault(v, 0) + 1);
-        }
-        
-        int n = edges.length + 1; // Number of nodes in the graph
-        
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() == n - 1) {
-                return entry.getKey();
-            }
-        }
-        
-        return -1;
     }
 }
