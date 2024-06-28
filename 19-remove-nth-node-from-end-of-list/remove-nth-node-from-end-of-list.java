@@ -14,6 +14,9 @@ class Solution {
         ListNode slow = head;
 
         for(int i = 0; i < n; i++){
+            if (fast == null) { // If n is larger than the length of the list
+                return head;
+            }
             fast = fast.next;
         }
 
@@ -26,7 +29,6 @@ class Solution {
             fast = fast.next;
         }
         
-        // ListNode deleteNode = slow.next;
         slow.next = slow.next.next;
         return head;
     }
