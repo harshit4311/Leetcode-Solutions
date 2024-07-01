@@ -2,10 +2,10 @@ class Solution {
     public int largestRectangleArea(int[] heights) {
         int n = heights.length;
 
-        Stack<Integer> stack = new Stack<>();
-        
         int[] leftSmall = new int[n];
         int[] rightSmall = new int[n];
+
+        Stack<Integer> stack = new Stack<>();
 
         for(int i = 0; i < n; i++) {
             while(!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
@@ -13,8 +13,8 @@ class Solution {
             }
 
             if(stack.isEmpty()) {
-                leftSmall[i] = -1;  // Assume the nearest smaller to the left is out of bounds
-            } 
+                leftSmall[i] = -1;
+            }
             else {
                 leftSmall[i] = stack.peek();
             }
@@ -30,8 +30,8 @@ class Solution {
             }
 
             if(stack.isEmpty()) {
-                rightSmall[i] = n;  // Assume the nearest smaller to the right is out of bounds
-            } 
+                rightSmall[i] = n;
+            }
             else {
                 rightSmall[i] = stack.peek();
             }
@@ -40,7 +40,7 @@ class Solution {
         }
 
         int maxArea = 0;
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             maxArea = Math.max(maxArea, heights[i] * (rightSmall[i] - leftSmall[i] - 1));
         }
         return maxArea;
