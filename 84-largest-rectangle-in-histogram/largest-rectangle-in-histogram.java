@@ -43,6 +43,7 @@ class Solution {
         for(int i = 0; i < n; i++) {
             maxArea = Math.max(maxArea, heights[i] * (rightSmall[i] - leftSmall[i] - 1));
         }
+
         return maxArea;
     }
 }
