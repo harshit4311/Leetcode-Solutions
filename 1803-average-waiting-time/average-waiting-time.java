@@ -9,7 +9,7 @@ class Solution {
             int arrivalTime = customers[i][0];
             int timeNeeded = customers[i][1];
 
-            if(currentTime < arrivalTime) {
+            if(currentTime <= arrivalTime) {
                 currentTime = arrivalTime;
             }
 
