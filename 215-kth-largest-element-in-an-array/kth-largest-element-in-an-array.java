@@ -1,18 +1,19 @@
 class Solution {
     public int findKthLargest(int[] arr, int k) {
         int n = arr.length;
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         
-        for(int i = 0; i < n; i++) {
-            maxHeap.add(arr[i]);
+        for(int i = 0; i < k; i++) {
+            minHeap.add(arr[i]);
         }
 
-         // Extract the maximum element k-1 times
-        for(int i = 0; i < k - 1; i++) {
-            maxHeap.poll();
+        for(int i = k; i < n; i++) {
+            if(arr[i] > minHeap.peek()) {
+                minHeap.poll();
+                minHeap.add(arr[i]);
+            }
         }
-        
-        // The next extraction will be the k-th largest element
-        return maxHeap.poll();
+
+        return minHeap.peek();
     }
 }
