@@ -1,35 +1,20 @@
-class Pair implements Comparator<Pair> {
-    int height;
-    String name;
-
-    Pair() {}
-
-    Pair(int height, String name) {
-        this.height = height;
-        this.name = name;
-    }
-
-    @Override
-    public int compare(Pair p1, Pair p2) {
-        return Integer.compare(p2.height, p1.height);
-    }
-}
-
 class Solution {
     public String[] sortPeople(String[] names, int[] heights) {
-        ArrayList<Pair> pairList = new ArrayList<>();
+        HashMap<Integer, String> map = new HashMap<>();
 
-        int n = names.length;
-
-        for(int i = 0; i < n; i++) {
-            pairList.add(new Pair(heights[i], names[i]));
+        // Map heights<-->names array
+        for(int i = 0; i < names.length; i++) {
+            map.put(heights[i], names[i]);
         }
 
-        Collections.sort(pairList, new Pair());
+        Arrays.sort(heights);
 
-        String[] result = new String[n];
-        for(int i = 0; i < n; i++) {
-            result[i] = pairList.get(i).name;
+        String[] result = new String[names.length];
+
+        int index = 0;
+        for(int i = heights.length - 1; i >= 0; i--) {
+            result[index] = map.get(heights[i]);
+            index++;
         }
 
         return result;
