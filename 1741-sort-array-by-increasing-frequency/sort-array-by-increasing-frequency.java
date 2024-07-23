@@ -18,7 +18,8 @@ class Solution {
                 return map.get(a) - map.get(b); // Sort by frequency in ascending order
             }
         });
-
+        
+        // Change arraylist to array to satisfy the return type of the function
         int[] result = new int[list.size()];
         for(int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
