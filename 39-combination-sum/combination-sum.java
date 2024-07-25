@@ -8,7 +8,7 @@ class Solution {
 
     public void helper(int i, int target, int[] arr, List<List<Integer>> list, List<Integer> ds) {
         if(i == arr.length) {
-            if(target == 0){
+            if(target == 0) {
                 list.add(new ArrayList<>(ds));
             }
             return;
@@ -21,7 +21,7 @@ class Solution {
             ds.remove(ds.size() - 1);
         }
 
-        // Don't take
+        // Don't Take
         helper(i + 1, target, arr, list, ds);
     }
 }
