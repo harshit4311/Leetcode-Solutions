@@ -16,7 +16,7 @@ class Solution {
             return;
         }
 
-        // Take
+        // Take and move forward
         if(arr[i] <= target) {
             ds.add(arr[i]);
             helper(i + 1, target - arr[i], arr, list, ds);
@@ -28,7 +28,7 @@ class Solution {
             i++;
         }
 
-        // Don't Take
+        // Don't Take, simply move forward 
         helper(i + 1, target, arr, list, ds);
     }
 }
