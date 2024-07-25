@@ -16,14 +16,14 @@ class Solution {
             return;
         }
 
-        // Take 
+        // Take
         if(arr[i] <= target) {
             ds.add(arr[i]);
             helper(i + 1, target - arr[i], arr, list, ds);
-            ds.remove(ds.size() - 1); // Backtrack
+            ds.remove(ds.size() - 1);
         }
-        
-        // Skip all duplicates
+
+        // Skip duplicates
         while((i + 1 <= arr.length - 1) && (arr[i] == arr[i + 1])) {
             i++;
         }
