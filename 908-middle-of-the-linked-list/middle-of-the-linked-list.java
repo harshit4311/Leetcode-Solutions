@@ -10,15 +10,27 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+        if(head.next == null) {
+            return head;
         }
 
-        // The 'slow' node now points to the middle element of the LinkedList
-        return slow;
+        int count = 0;
+        ListNode current = head;
+        while(current != null) {
+            current = current.next;
+            count++;
+        }
+
+        if(count % 2 == 0) {
+            int mid = (count / 2) + 1;
+        }
+        int mid = count / 2;
+
+        current = head;
+        for(int i = 0; i < mid; i++) {
+            current = current.next;
+        }
+
+        return current;
     }
 }
