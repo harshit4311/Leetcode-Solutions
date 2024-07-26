@@ -10,25 +10,27 @@
  */
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
-
-        if(head == null || head.next == null){
+        if(head == null || head.next == null) {
             return null;
         }
-        
+
+        // Initialize slow and fast pointers and a previous pointer for slow
         ListNode slow = head;
         ListNode fast = head;
+        ListNode prev = null;
 
-        // We do this so that slow skips 1 step
-        fast = fast.next.next;
-
-        while(fast != null && fast.next != null){
+        // Move fast twice as fast as slow
+        while (fast != null && fast.next != null) {
+            prev = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        // Attach slow to the Node present just after the deleted Node
-        slow.next = slow.next.next;
-        
-        return head; 
+        // Delete mid node
+        if(prev != null) {
+            prev.next = slow.next;
+        }
+
+        return head;
     }
 }
