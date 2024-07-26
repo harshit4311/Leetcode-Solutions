@@ -14,21 +14,24 @@ class Solution {
             return null;
         }
 
-        // Initialize slow and fast pointers and a previous pointer for slow
-        ListNode slow = head;
-        ListNode fast = head;
-        ListNode prev = null;
+        int count = 0;
+        ListNode current = head;
+        while(current != null) {
+            count++;
+            current = current.next;
+        }
 
-        // Move fast twice as fast as slow
-        while (fast != null && fast.next != null) {
-            prev = slow;
-            slow = slow.next;
-            fast = fast.next.next;
+        int mid = count / 2;
+
+        // Traverse to (mid-1)th node
+        current = head;
+        for(int i = 0; i < mid - 1; i++) {
+            current = current.next;
         }
 
         // Delete mid node
-        if(prev != null) {
-            prev.next = slow.next;
+        if(current.next != null) {
+            current.next = current.next.next;
         }
 
         return head;
