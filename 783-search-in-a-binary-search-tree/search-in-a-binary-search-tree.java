@@ -16,17 +16,18 @@
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
         
-        if(root == null || root.val == val){
+        // val == root.val
+        if(root == null || root.val == val) {
             return root;
         }
 
-        // Search on the left side
-        if(val < root.val){
+        // val < root.val, Search on LEFT
+        if(val < root.val) {
             return searchBST(root.left, val);
         }
-
-        // Search on the right side
-        else{
+        
+        // val > root.val, Search on RIGHT
+        else {
             return searchBST(root.right, val);
         }
 
