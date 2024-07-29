@@ -15,8 +15,8 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        ArrayList<Integer> result = new ArrayList<>();
-        
+        List<Integer> result = new ArrayList<>();
+
         if(root == null) {
             return result;
         }
@@ -34,7 +34,7 @@ class Solution {
                 if(node.left != null) queue.add(node.left);
                 if(node.right != null) queue.add(node.right);
             }
-            result.add(node.val);
+            result.add(node.val); // Add the last node of each level to the result
         }
 
         return result;
