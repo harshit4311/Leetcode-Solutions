@@ -15,48 +15,38 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
-
-        if(root == null){
-            return list;
+        List<List<Integer>> result = new ArrayList<>();
+        
+        if(root == null) {
+            return result;
         }
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+        Queue<TreeNode> queue = new LinkedList<>(); 
+        queue.add(root);
 
-        boolean isReversed=true;
+        boolean isReversed = true;
 
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty()) {
             int size = queue.size();
-            List<Integer> innerList = new ArrayList<>();
 
-            for(int i = 0; i < size; i++){
-                TreeNode current = queue.poll();
-
-                // Add the Left child at the end of the queue
-                if(current.left != null){
-                    queue.offer(current.left);
-                }
-
-                // Add the Right child at the end of the queue
-                if(current.right != null){
-                    queue.offer(current.right);
-                }
-
-                innerList.add(current.val);
+            List<Integer> currentLevel = new ArrayList<>();
+            
+            for(int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                
+                currentLevel.add(node.val);
+                if(node.left != null) queue.add(node.left);
+                if(node.right != null) queue.add(node.right);
+            }
+            if(!isReversed) {
+                Collections.reverse(currentLevel);
             }
 
-            // Reverse the list alternatively
-            if(!isReversed){
-                Collections.reverse(innerList);
-            }
+            result.add(currentLevel);
 
-            list.add(innerList);
-
-            // Toggle the isReversed variable for the next iteration
-            isReversed = !isReversed;
+            isReversed = !(isReversed);
         }
 
-        return list;
+        return result;
     }
 }
