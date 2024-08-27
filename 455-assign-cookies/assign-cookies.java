@@ -7,18 +7,15 @@ class Solution {
         Arrays.sort(greedFactor);
         Arrays.sort(size);
 
-        int left = 0;
+        int count = 0;
+
         int right = 0;
 
-        while (left < size.length && right < greedFactor.length) {
+        for (int left = 0; left < size.length && right < greedFactor.length; left++) {
             if (size[left] >= greedFactor[right]) {
                 right++;
             }
-
-            left++;
-
         }
-
         return right;
     }
 }
