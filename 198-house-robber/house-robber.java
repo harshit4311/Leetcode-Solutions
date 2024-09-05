@@ -1,17 +1,29 @@
 class Solution {
+    int[] dp;
     public int rob(int[] arr) {
-        if(arr.length == 0) return 0;
-        if(arr.length == 1) return arr[0];
+        int n = arr.length;
 
-        int[] dp = new int[arr.length + 1];
+        dp = new int[n + 1];
+        Arrays.fill(dp, -1);
 
-        dp[0] = 0;
-        dp[1] = arr[0];
+        return helper(arr, 0);
+    }
 
-        for(int i = 2; i <= arr.length; i++) {
-            dp[i] = Math.max(arr[i - 1] + dp[i - 2], dp[i - 1]);
+    public int helper(int[] arr, int i) {
+        int n = arr.length;
+
+        if(i >= n) {
+            return 0; 
         }
 
-        return dp[arr.length];
+        if(dp[i] != -1) {
+            return dp[i];
+        }
+
+        int steal = arr[i] + helper(arr, i + 2);
+        int skip = helper(arr, i + 1);
+
+        dp[i] = Math.max(steal, skip);
+        return dp[i];
     }
 }
