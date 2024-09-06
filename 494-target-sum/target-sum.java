@@ -14,12 +14,9 @@ class Solution {
         }
 
         else {
+            helper(arr, i + 1, currentSum - arr[i], target); 
 
-            // Negative(-ve) sign before taking an element
             helper(arr, i + 1, currentSum + arr[i], target); 
-
-            // Positive(+ve) sign before taking an element
-            helper(arr, i + 1, currentSum - arr[i], target);
         }
 
         return count;
