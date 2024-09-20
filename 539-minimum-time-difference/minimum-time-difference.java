@@ -4,6 +4,7 @@ class Solution {
 
         for(String time : timePoints) {
             String[] parts = time.split(":");
+            
             int hrs = Integer.parseInt(parts[0]);
             int mins = Integer.parseInt(parts[1]);
 
